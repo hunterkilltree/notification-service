@@ -1,3 +1,12 @@
+server:
+  port: 8080
+  servlet:
+    # trong he thong neu co nhieu microservice thi 
+    # context se dinh vi dc cai microservice
+    # va khi ma chung ta co 1 loadbalancer apply vao 
+    # thi loadbalancer se routing cai request toi dung micro-service nay
+    context-path: /notification-system
+
 spring:
   application:
     name: notification-system
