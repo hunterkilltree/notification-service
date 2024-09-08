@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: notification-system
+  output:
+    ansi:
+      enabled: always # color log when running in terminal
+  datasource:
+    # url: jdbc:mysql://localhost:3306/notification?createDatabaseIfNotExist=true # database name
+    url: jdbc:mysql://localhost:3306
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none  # Disable Hibernate schema management
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  # This not run need to create schema manual
+  # sql:
+  #   init:
+  #     schema-locations: classpath:sql/schema.sql
+
+  liquibase:
+    change-log: classpath:liquibase/changelog-master.xml  # Path to Liquibase changelog file
+    default-schema: admin_schema
+    enabled: true  # Enable Liquibase on application startup

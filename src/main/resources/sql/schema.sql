@@ -1,0 +1,2 @@
+CREATE SCHEMA IF NOT EXISTS notification_schema;
+CREATE SCHEMA IF NOT EXISTS admin_schema;
