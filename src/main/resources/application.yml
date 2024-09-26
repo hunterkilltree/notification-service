@@ -1,9 +1,9 @@
 server:
   port: 8080
   servlet:
-    # trong he thong neu co nhieu microservice thi 
+    # trong he thong neu co nhieu microservice thi
     # context se dinh vi dc cai microservice
-    # va khi ma chung ta co 1 loadbalancer apply vao 
+    # va khi ma chung ta co 1 loadbalancer apply vao
     # thi loadbalancer se routing cai request toi dung micro-service nay
     context-path: /notification-system
 
@@ -15,13 +15,13 @@ spring:
       enabled: always # color log when running in terminal
   datasource:
     # url: jdbc:mysql://localhost:3306/notification?createDatabaseIfNotExist=true # database name
-    url: jdbc:mysql://localhost:3306
+    url: jdbc:mysql://localhost:3306/notification_schema
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: none  # Disable Hibernate schema management
+      ddl-auto: none # Disable Hibernate schema management
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
   # This not run need to create schema manual
@@ -30,6 +30,6 @@ spring:
   #     schema-locations: classpath:sql/schema.sql
 
   liquibase:
-    change-log: classpath:liquibase/changelog-master.xml  # Path to Liquibase changelog file
+    change-log: classpath:liquibase/changelog-master.xml # Path to Liquibase changelog file
     default-schema: admin_schema
-    enabled: true  # Enable Liquibase on application startup
+    enabled: true # Enable Liquibase on application startup
