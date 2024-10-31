@@ -11,7 +11,7 @@ import lombok.Setter;
 public class UserCreationRequest {
   private String username;
 
-  @Size(min = 8, message = "Password must be at least 8 characters")
+  @Size(min = 8, message = "USER_PASSWORD_INVALID")
   private String password;
 
   // private String email;

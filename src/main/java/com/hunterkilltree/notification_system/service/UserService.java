@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.hunterkilltree.notification_system.dto.request.UserCreationRequest;
 import com.hunterkilltree.notification_system.dto.request.UserUpdateRequest;
 import com.hunterkilltree.notification_system.entity.User;
+import com.hunterkilltree.notification_system.exception.AppException;
+import com.hunterkilltree.notification_system.exception.ErrorCode;
 import com.hunterkilltree.notification_system.repository.UserRepository;
 
 @Service
@@ -19,7 +21,7 @@ public class UserService {
     User user = new User();
 
     if (userRepository.existsByUsername(request.getUsername())) {
-      throw new RuntimeException("Username already exists");
+      throw new AppException(ErrorCode.USER_EXISTS);
     }
     user.setUsername(request.getUsername());
     user.setPassword(request.getPassword());
