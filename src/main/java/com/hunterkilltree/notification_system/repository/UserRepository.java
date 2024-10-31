@@ -11,5 +11,5 @@ import com.hunterkilltree.notification_system.entity.User;
 // 3. Repository: nơi tương tác trực tiếp với dbms, kết nối với hệ thống bên ngoài để lưu trữ
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-
+  boolean existsByUsername(String name);
 }
