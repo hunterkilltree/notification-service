@@ -10,6 +10,8 @@ import com.hunterkilltree.notification_system.dto.request.UserUpdateRequest;
 import com.hunterkilltree.notification_system.entity.User;
 import com.hunterkilltree.notification_system.service.UserService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +28,7 @@ public class UserController {
 
   // lưu ý user(s) đây là convention của việc đặt tên path cho API
   @PostMapping
-  public User creteUser(@RequestBody UserCreationRequest request) {
+  public User creteUser(@RequestBody @Valid UserCreationRequest request) {
       return userService.createUser(request);
   }
   
