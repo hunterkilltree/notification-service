@@ -10,6 +10,7 @@ import com.hunterkilltree.notification_system.dto.request.UserUpdateRequest;
 import com.hunterkilltree.notification_system.entity.User;
 import com.hunterkilltree.notification_system.exception.AppException;
 import com.hunterkilltree.notification_system.exception.ErrorCode;
+import com.hunterkilltree.notification_system.mapper.UserMapper;
 import com.hunterkilltree.notification_system.repository.UserRepository;
 
 @Service
@@ -17,15 +18,15 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-  public User createUser(UserCreationRequest request) {
-    User user = new User();
+  @Autowired
+  private UserMapper userMapper;
 
+  public User createUser(UserCreationRequest request) {
     if (userRepository.existsByUsername(request.getUsername())) {
       throw new AppException(ErrorCode.USER_EXISTS);
     }
-    user.setUsername(request.getUsername());
-    user.setPassword(request.getPassword());
-    // user.setEmail(request.getEmail());
+
+    User user = userMapper.toUser(request);
     return userRepository.save(user);
   }
 
