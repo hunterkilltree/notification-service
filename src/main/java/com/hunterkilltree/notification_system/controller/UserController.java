@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hunterkilltree.notification_system.dto.request.ApiResponse;
 import com.hunterkilltree.notification_system.dto.request.UserCreationRequest;
 import com.hunterkilltree.notification_system.dto.request.UserUpdateRequest;
+import com.hunterkilltree.notification_system.dto.response.UserResponse;
 import com.hunterkilltree.notification_system.entity.User;
 import com.hunterkilltree.notification_system.service.UserService;
 
@@ -29,11 +30,11 @@ public class UserController {
 
   // lưu ý user(s) đây là convention của việc đặt tên path cho API
   @PostMapping
-  public ApiResponse<User> creteUser(@RequestBody @Valid UserCreationRequest request) {
+  public ApiResponse<UserResponse> creteUser(@RequestBody @Valid UserCreationRequest request) {
     // ApiResponse<User> response = new ApiResponse<>();
     // response.setResult(userService.createUser(request));
     
-    return ApiResponse.<User>builder()
+    return ApiResponse.<UserResponse>builder()
     .result(userService.createUser(request))
     .build();
   }

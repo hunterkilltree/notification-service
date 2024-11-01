@@ -7,27 +7,31 @@ import org.springframework.stereotype.Service;
 
 import com.hunterkilltree.notification_system.dto.request.UserCreationRequest;
 import com.hunterkilltree.notification_system.dto.request.UserUpdateRequest;
+import com.hunterkilltree.notification_system.dto.response.UserResponse;
 import com.hunterkilltree.notification_system.entity.User;
 import com.hunterkilltree.notification_system.exception.AppException;
 import com.hunterkilltree.notification_system.exception.ErrorCode;
 import com.hunterkilltree.notification_system.mapper.UserMapper;
 import com.hunterkilltree.notification_system.repository.UserRepository;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserService {
-  @Autowired
-  private UserRepository userRepository;
+  UserRepository userRepository;
+  UserMapper userMapper;
 
-  @Autowired
-  private UserMapper userMapper;
-
-  public User createUser(UserCreationRequest request) {
+  public UserResponse createUser(UserCreationRequest request) {
     if (userRepository.existsByUsername(request.getUsername())) {
       throw new AppException(ErrorCode.USER_EXISTS);
     }
 
     User user = userMapper.toUser(request);
-    return userRepository.save(user);
+    return userMapper.toUserResponse(userRepository.save(user));
   }
 
   public List<User> getAllUsers() {
@@ -42,6 +46,7 @@ public class UserService {
   public User updateUser(String id, UserUpdateRequest request) {
     User user = getUser(id);
 
+    userMapper.updateUser(user, request);
     user.setPassword(request.getPassword());
     return userRepository.save(user);
   }
